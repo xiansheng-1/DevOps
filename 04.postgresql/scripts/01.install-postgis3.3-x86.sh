@@ -24,7 +24,32 @@ fi
 arch=$(uname -m)
 print_colored "$BLUE" "System architecture: $arch"
 
+# 3. Install EPEL repository
+yum install -y epel-release
 
+# 4. Configure PostgreSQL YUM repository
+cat > /etc/yum.repos.d/pgdg-custom.repo << EOF
+[pgdg-common]
+name=PostgreSQL common RPMs for RHEL/CentOS 7 - x86_64
+baseurl=https://download.postgresql.org/pub/repos/yum/common/redhat/rhel-7-x86_64
+enabled=1
+gpgcheck=0
+
+[pgdg15]
+name=PostgreSQL 15 for RHEL/CentOS 7 - x86_64
+baseurl=https://download.postgresql.org/pub/repos/yum/15/redhat/rhel-7-x86_64
+enabled=1
+gpgcheck=0
+EOF
+
+# 5. Clean and rebuild cache
+yum clean all && yum makecache 
+
+# 6. Install packages
+cd /usr/local/pg15.5-rpm
+yum install -y python3
+rpm -ivh postgresql15-contrib-15.5-1PGDG.rhel7.x86_64.rpm --nosignature
+yum install -y postgis33_15
 
 
 
