@@ -50,19 +50,3 @@ cd /usr/local/pg15.5-rpm
 yum install -y python3
 rpm -ivh postgresql15-contrib-15.5-1PGDG.rhel7.x86_64.rpm --nosignature
 yum install -y postgis33_15
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-yum -y install libpython3.6m.so.1.0
-rpm -ivh postgresql15-contrib-15.5-1PGDG.rhel7.x86_64.rpm
